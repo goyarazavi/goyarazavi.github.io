@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google-site-verification" content="8hX6jZaxTX8i5V0Qx288bXVGpVEl8kVgRuYhV3NHuZY" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goya Razavi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Karla:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --ink: #111;
+      --text: #333;
+      --muted: #666;
+      --light: #999;
+      --rule: #ddd;
+      --bg: #fff;
+      --serif: 'EB Garamond', Georgia, serif;
+      --sans: 'Karla', 'Helvetica Neue', Arial, sans-serif;
+      --content-width: 680px;
+    }
+
+    html { font-size: 17px; scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.75;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: rgba(0,0,0,0.08); }
+
+    a { color: var(--text); }
+    a:hover { color: #000; }
+
+    /* ── LAYOUT ── */
+    .wrapper {
+      max-width: var(--content-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ── HEADER / NAV ── */
+    header {
+      padding: 2.5rem 0 2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    header h1 {
+      font-family: var(--serif);
+      font-size: 1.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    header h1 a {
+      text-decoration: none;
+      color: inherit;
+    }
+    nav {
+      margin-top: 0.7rem;
+    }
+    nav a {
+      font-size: 0.84rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      margin-right: 1.6rem;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--ink);
+    }
+
+    /* ── PAGE SECTIONS ── */
+    .page {
+      display: none;
+      padding: 2.5rem 0 4rem;
+    }
+    .page.active { display: block; }
+
+    /* ── ABOUT ── */
+    .about-layout {
+      display: flex;
+      gap: 2.2rem;
+      align-items: flex-start;
+    }
+    .about-photo {
+      width: 160px;
+      min-width: 160px;
+      height: 200px;
+      background: #f4f4f4;
+      border: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--light);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+      overflow: hidden;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-text p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .about-text a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: var(--rule);
+      transition: text-decoration-color 0.2s;
+    }
+    .about-text a:hover {
+      text-decoration-color: var(--ink);
+    }
+    .about-text .affiliations {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-top: 0.5rem;
+    }
+    .about-text .affiliations a {
+      color: var(--muted);
+    }
+    .about-text .affiliations a:hover {
+      color: var(--ink);
+    }
+    .cv-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+    .cv-link:hover { border-color: var(--ink); }
+
+    /* ── RESEARCH ── */
+    .section-heading {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .section-heading:first-child { margin-top: 0; }
+
+    .paper {
+      margin-bottom: 1.8rem;
+    }
+    .paper-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .paper-title a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      transition: border-color 0.2s;
+    }
+    .paper-title a:hover { border-color: var(--ink); }
+    .paper-authors {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+    .paper-venue {
+      font-size: 0.84rem;
+      color: var(--light);
+      font-style: italic;
+      margin-top: 0.1rem;
+    }
+    .paper-abstract {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 0.6rem;
+    }
+    .paper-abstract-toggle {
+      font-size: 0.78rem;
+      color: var(--light);
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: var(--sans);
+      padding: 0;
+      margin-top: 0.4rem;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      transition: color 0.2s;
+    }
+    .paper-abstract-toggle:hover { color: var(--ink); }
+    .paper-abstract-content {
+      display: none;
+      margin-top: 0.5rem;
+    }
+    .paper-abstract-content.open { display: block; }
+    .paper-press {
+      font-size: 0.82rem;
+      color: var(--light);
+      margin-top: 0.4rem;
+    }
+    .paper-press a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* ── TEACHING ── */
+    .teaching-item {
+      margin-bottom: 1.4rem;
+    }
+    .teaching-course {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+    .teaching-meta {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+    .teaching-meta a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .teaching-meta a:hover { color: var(--ink); }
+
+    /* ── CONTACT ── */
+    .contact-text {
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 1.5rem 0;
+      margin-top: 2rem;
+    }
+    footer p {
+      font-size: 0.76rem;
+      color: var(--light);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      html { font-size: 16px; }
+      .about-layout {
+        flex-direction: column;
+      }
+      .about-photo {
+        width: 130px;
+        min-width: 130px;
+        height: 165px;
+      }
+      header h1 { font-size: 1.6rem; }
+      nav a { margin-right: 1.2rem; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrapper">
+
+    <!-- Header -->
+    <header>
+      <h1><a href="#" onclick="showPage('about'); return false;">Goya Razavi</a></h1>
+      <nav>
+        <a href="#about" data-page="about" class="active" onclick="showPage('about'); return false;">About</a>
+        <a href="#research" data-page="research" onclick="showPage('research'); return false;">Research</a>
+        <a href="#teaching" data-page="teaching" onclick="showPage('teaching'); return false;">Teaching</a>
+        <a href="#contact" data-page="contact" onclick="showPage('contact'); return false;">Contact</a>
+      </nav>
+    </header>
+
+    <!-- ═══ ABOUT ═══ -->
+    <div id="about" class="page active">
+      <div class="about-layout">
+        <div class="about-photo">
+          <img src="photo.jpg" alt="Goya Razavi">
+        </div>
+        <div class="about-text">
+          <p>
+            I am an Assistant Professor and a <a href="https://marie-sklodowska-curie-actions.ec.europa.eu/actions/postdoctoral-fellowships">Marie Skłodowska-Curie Fellow</a> in the Department of Economics at the <a href="https://www.nhh.no/en/">Norwegian School of Economics (NHH)</a>. I received my PhD from the <a href="https://harris.uchicago.edu">Harris School of Public Policy</a> at the University of Chicago.
+          </p>
+          <p>
+            My research interests include Labor Economics, Economics of Education, and Urban Economics. My work focuses on understanding the determinants of socioeconomic inequality to inform the design of public policies aimed at fostering social mobility. To that end, I build on frontier econometric methods and rich administrative datasets.
+          </p>
+          <p class="affiliations">
+            I'm a <a href="https://cehd.uchicago.edu/?page_id=8293">Research Associate</a> at <a href="https://cehd.uchicago.edu">The Center for the Economics of Human Development</a>, a Research Affiliate at <a href="https://www.rfberlin.com">RFBerlin</a>, and a member of the <a href="https://stonecenter.uchicago.edu/the-inequality-working-group-iwg/">Inequality Working Group</a> at the <a href="https://stonecenter.uchicago.edu">Stone Center for Research on Wealth Inequality and Mobility</a>.
+          </p>
+          <p class="affiliations">
+            I hold a BSc in Economics and MSc in Philosophy of the Social Sciences from the London School of Economics. Prior to my PhD, I contributed to policy analysis for the European Commission and the United Nations.
+          </p>
+          <a class="cv-link" href="https://voices.uchicago.edu/razavi/files/2024/11/Razavi_CV.pdf">Download CV</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ RESEARCH ═══ -->
+    <div id="research" class="page">
+
+      <h2 class="section-heading">Working Papers</h2>
+
+      <div class="paper">
+        <p class="paper-title"><a href="https://uchicago.app.box.com/embed/s/526cje93xuvrcrbrnqlf2k3ro19xfbhi">Universal Higher Education and Upward Mobility: Degree Returns, Admission Policies and Student Sorting</a></p>
+        <button class="paper-abstract-toggle" onclick="toggleAbstract(this)">Abstract</button>
+        <div class="paper-abstract-content">
+          <p class="paper-abstract">
+            This paper examines how returns to colleges and majors, admission policies, and student sorting affect intergenerational mobility. I study this question in Denmark, where tuition-free colleges and generous living grants provide an ideal setting to investigate the sources of inequality that remain in the absence of financial constraints. Leveraging GPA admission cutoffs from a centralized matching algorithm, I apply a regression discontinuity design to examine whether students from low socioeconomic status (SES) benefit from selective degrees (college-major pairs). Scoring just above the cutoff for admission to a more selective degree raises low-SES students' income by 9% at age 30, partially closing the SES wage gap. I develop a joint model of degree selection and labor market outcomes, to disentangle the contribution of degree-specific returns from that of students' degree choices as sources of inequality. The model accounts for the impact of degree peer composition on outcomes. Estimates from the model reveal that returns to degree enrollment are higher for low-SES students than for high-SES peers across the distribution of degree selectivity. Furthermore, I find that the current GPA-based meritocratic admissions system is inefficient in terms of maximizing long-term earnings. Implementing need-affirmative admissions could reduce the SES wage gap by 15% through upward mobility of disadvantaged students, without adversely impacting displaced high-SES students. Notably, the SES wage gap could be eliminated if students selected degrees based on expected earnings returns.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="paper">
+        <p class="paper-title"><a href="https://www.nber.org/papers/w31371">Pricing Neighborhoods</a></p>
+        <p class="paper-authors">with James Heckman &amp; Sadegh Eshaghnia</p>
+        <p class="paper-venue">NBER Working Paper #31371 (under review)</p>
+        <button class="paper-abstract-toggle" onclick="toggleAbstract(this)">Abstract</button>
+        <div class="paper-abstract-content">
+          <p class="paper-abstract">
+            Education in Denmark is freely available. Despite near equal teacher salaries and per-pupil school expenditure across districts, there is substantial spatial heterogeneity in school quality as measured by teacher quality and student test scores. We argue that this is due to sorting of teachers and students across neighborhoods. We develop and apply multiple methods for identifying parental valuation of measured school quality in the presence of strong neighborhood sorting. There is strong concordance in the estimates across diverse methodologies. We estimate a willingness to pay of about 3% more for a house with average characteristics when test scores are one standard deviation above the mean. Controlling for selection into neighborhoods only slightly reduces our estimates. This evidence challenges the appropriateness of the current emphasis in the literature on Tiebout-based models of neighborhood choice that stress sorting on parental income in order to finance the local public good of school quality.
+          </p>
+        </div>
+        <p class="paper-press">Press: <a href="https://www.berlingske.dk/danmark/foraeldre-vil-betale-mere-for-et-hus-i-omraader-med-hoejere">Berlingske</a></p>
+      </div>
+
+      <div class="paper">
+        <p class="paper-title">Neighborhoods, Family and Intergenerational Mobility</p>
+        <p class="paper-authors">with Raul Leon</p>
+        <p class="paper-venue">Draft available upon request</p>
+        <button class="paper-abstract-toggle" onclick="toggleAbstract(this)">Abstract</button>
+        <div class="paper-abstract-content">
+          <p class="paper-abstract">
+      To what extent do childhood neighborhoods shape long-run socio-economic outcomes, and through which mechanisms? Using the quasi-random assignment of refugee children across neighborhoods in Denmark, we show that exposure to higher-quality neighborhoods---as measured by average neighborhood income and the wage outcomes of permanent resident children---raises labor force participation and market income in adulthood. Beyond economic integration, better neighborhoods further promote social integration by increasing educational attainment and naturalization. Applying a causal mediation analysis, we reject full mediation via neighborhood and school characteristics but not via parental income, pointing to the family as a fundamental mediator of neighborhood effects.
+          </p>
+        </div>
+      </div>
+
+
+      <div class="paper">
+        <p class="paper-title"><a href="https://uchicago.box.com/s/8j7xwvcyt5m6twlpz0x3udbqnbizmtmq">The Dynastic Benefits of Neighborhood Sorting</a></p>
+        <p class="paper-authors">with James Heckman &amp; Sadegh Eshaghnia</p>
+        <button class="paper-abstract-toggle" onclick="toggleAbstract(this)">Abstract</button>
+        <div class="paper-abstract-content">
+          <p class="paper-abstract">
+            Using rich longitudinal data from Denmark, this paper uses a variety of empirical strategies to estimate the benefits of parental neighborhood sorting, as captured by better neighborhood and school peers, and teacher quality. Attending better schools significantly impacts later life outcomes of children, including increasing college graduation and wages while reducing criminal activity and teenage pregnancy. Linking these effects with the cost of sorting to neighborhoods, we estimate a private internal rate of return in the range 4%–15%.
+          </p>
+        </div>
+      </div>
+
+    
+      <h2 class="section-heading">Selected Work in Progress</h2>
+
+      <div class="paper">
+        <p class="paper-title">The Role of the Labor Market in Intergenerational Mobility</p>
+        <p class="paper-authors">with Kjell Salvanes and Alexander Willén</p>
+      </div>
+    
+      <div class="paper">
+        <p class="paper-title">Neighborhood Effects and Children's Long-Term Outcomes</p>
+        <p class="paper-authors">with Sadegh Eshaghnia</p>
+      </div>
+      
+      <div class="paper">
+        <p class="paper-title">The Efficiency of Affirmative Action Policies</p>
+        <p class="paper-authors">with Runzhong Xu</p>
+      </div>
+
+      <div class="paper">
+        <p class="paper-title">Neighborhood Mobility over the Life Cycle, Sorting, and Segregation</p>
+        <p class="paper-authors">with James Heckman &amp; Sadegh Eshaghnia</p>
+      </div>
+
+      <h2 class="section-heading">PhD Thesis</h2>
+
+      
+      <div class="paper">
+        <p class="paper-title"><a href="https://knowledge.uchicago.edu/record/15081?v=pdf">Essays on the Sources of Intergenerational Mobility</a></p>
+        <button class="paper-abstract-toggle" onclick="toggleAbstract(this)">Abstract</button>
+        <div class="paper-abstract-content">
+          <p class="paper-abstract">
+This dissertation investigates several drivers of intergenerational mobility. The first chapter examines how returns to colleges and majors, admission policies, and student sorting affect intergenerational mobility. I study this question in Denmark, where tuition-free colleges and generous living grants provide an ideal setting to investigate the sources of inequality that remain in the absence of financial constraints. Leveraging GPA admission cutoffs from a centralized matching algorithm, I apply a regression discontinuity design to examine whether students from low socioeconomic status (SES) benefit from selective degrees (college-major pairs). Scoring just above the cutoff for admission to a more selective degree raises low-SES students' income by 9% at age 30, partially closing the SES wage gap. I develop a joint model of degree selection and labor market outcomes, to disentangle the contribution of degree-specific returns from that of students' degree choices as sources of inequality. The model accounts for the impact of degree peer composition on outcomes. Estimates from the model reveal that returns to degree enrollment are higher for low-SES students than for high-SES peers across the distribution of degree selectivity. Furthermore, I find that the current GPA-based meritocratic admissions system is inefficient in terms of maximizing long-term earnings. Implementing need-affirmative admissions could reduce the SES wage gap by 15% through upward mobility of disadvantaged students, without adversely impacting displaced high-SES students. Notably, the SES wage gap could be eliminated if students selected degrees based on expected earnings returns. The second chapter studies households’ willingness to pay for neighborhood and school attributes. In Denmark, education at all levels is tuition-free. Teacher salaries and expenditures on schools are mandated to be equal. Yet there is substantial variation in teacher quality and student performance across neighborhoods around schools for which parents pay in terms of housing prices. Homophily--sorting by parental education and income into neighborhoods with different peer, teacher and housing attributes explains this phenomenon and not the sorting by preferences for school quality and tax expenditure emphasized in many models of local public goods. Parents buy packages of attributes and not just school quality, which is the emphasis in much of the literature. We develop and apply multiple approaches to identifying parental valuation of measured school quality in the presence of strong neighborhood sorting. Finally, the last chapter examines whether growing up in a better neighborhood has positive consequences on long-term labor market outcomes and educational attainment. We exploit a unique spatial dispersal policy that randomly resettled refugees across neighborhoods in Denmark from 1986-1998. We find that a higher quality neighborhood--as measured by the wage outcomes of children already living there--is significantly associated with increased market income in adulthood. Our mediation analysis reveals that the effect of neighborhood quality on child adult income is fully mediated through the impact of assigned neighborhood on parental income.
+          </p>
+        </div>
+      </div>
+
+    
+    </div>
+
+    <!-- ═══ TEACHING ═══ -->
+    <div id="teaching" class="page">
+
+    <h2 class="section-heading">Norwegian School of Economics</h2>
+
+      <div class="teaching-item">
+        <p class="teaching-course">PhD Econometrics</p>
+        <p class="teaching-meta">PhD-level · <a href="https://www.nhh.no/en/courses/phd-econometrics-ii/">ECS09</a> · Spring 2026</p>
+      </div>
+
+      <div class="teaching-item">
+        <p class="teaching-course">Data Science and Econometrics</p>
+        <p class="teaching-meta">Undergraduate · <a href="https://www.nhh.no/en/courses/data-science-and-econometrics-/">TECH6</a> · Fall 2026</p>
+      </div>
+
+
+      <h2 class="section-heading">Teaching Assistant, University of Chicago</h2>
+
+      <div class="teaching-item">
+        <p class="teaching-course">Inequality: Theory, Methods and Evidence</p>
+        <p class="teaching-meta">PhD-level · <a href="https://harris.uchicago.edu/directory/steven-durlauf">Prof. Steven N. Durlauf</a> · 2024</p>
+      </div>
+
+      <div class="teaching-item">
+        <p class="teaching-course">Current Topics I: Intergenerational Mobility</p>
+        <p class="teaching-meta">Harris Evening Master's Program · <a href="https://harris.uchicago.edu/directory/steven-durlauf">Prof. Steven N. Durlauf</a> · 2022, 2023</p>
+      </div>
+
+      <div class="teaching-item">
+        <p class="teaching-course">Econometrics</p>
+        <p class="teaching-meta">PhD-level · <a href="https://harris.uchicago.edu/directory/steven-durlauf">Prof. Steven N. Durlauf</a> · 2021</p>
+      </div>
+
+      <div class="teaching-item">
+        <p class="teaching-course">Game Theory</p>
+        <p class="teaching-meta">PhD-level · <a href="https://harris.uchicago.edu/directory/konstantin-sonin">Prof. Konstantin Sonin</a> · 2021</p>
+      </div>
+
+      <div class="teaching-item">
+        <p class="teaching-course">Social Interactions and Inequality</p>
+        <p class="teaching-meta">PhD-level · <a href="https://harris.uchicago.edu/directory/steven-durlauf">Prof. Steven N. Durlauf</a> · 2020, 2021, 2023</p>
+      </div>
+
+    </div>
+
+    <!-- ═══ CONTACT ═══ -->
+    <div id="contact" class="page">
+      <p class="contact-text">
+        You can reach me at: <strong>goya.razavi (at) nhh (dot) no</strong>
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Goya Razavi</p>
+    </footer>
+
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelector(`nav a[data-page="${id}"]`).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      history.replaceState(null, '', `#${id}`);
+    }
+
+    function toggleAbstract(btn) {
+      const content = btn.nextElementSibling;
+      const isOpen = content.classList.toggle('open');
+      btn.textContent = isOpen ? 'Hide abstract' : 'Abstract';
+    }
+
+    // Handle direct link to hash
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#', '');
+      if (['about','research','teaching','contact'].includes(hash)) {
+        showPage(hash);
+      }
+    });
+  </script>
+
+</body>
+</html>
